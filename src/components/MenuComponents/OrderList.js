@@ -40,7 +40,7 @@ function OrderList() {
             );
         });
         setFilteredOrders(filtered);
-        setCurrentPage(1); // Reset to the first page
+        setCurrentPage(1);
         setIsSearching(true);
     };
 
