@@ -1,24 +1,16 @@
 import { useState } from "react";
 
-// Hàm chuyển đổi ngày từ yyyy-mm-dd sang dd/mm/yy
-const formatDateToDDMMYY = (dateStr) => {
-    const [year, month, day] = dateStr.split("-");
-    return `${day}/${month}/${year.slice(2)}`;
-};
-
 function DateRangeSearch({ onSearch }) {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
 
     const handleSearch = () => {
-        const formattedStartDate = startDate ? formatDateToDDMMYY(startDate) : "";
-        const formattedEndDate = endDate ? formatDateToDDMMYY(endDate) : "";
-        onSearch({ startDate: formattedStartDate, endDate: formattedEndDate });
+        onSearch({ startDate, endDate });
     };
 
     return (
-        <div className="d-flex align-items-center justify-content-between">
-            <div className="me-2">
+        <div className="d-flex align-items-center">
+            <div className="me-3">
                 <label htmlFor="startDate" className="form-label">Từ ngày</label>
                 <input
                     id="startDate"
@@ -28,7 +20,7 @@ function DateRangeSearch({ onSearch }) {
                     onChange={(e) => setStartDate(e.target.value)}
                 />
             </div>
-            <div className="me-2">
+            <div className="me-3">
                 <label htmlFor="endDate" className="form-label">Đến ngày</label>
                 <input
                     id="endDate"
@@ -41,6 +33,7 @@ function DateRangeSearch({ onSearch }) {
             <button
                 className="btn btn-primary"
                 onClick={handleSearch}
+                style={{marginTop: '30px'}}
             >
                 Tìm kiếm theo ngày
             </button>

@@ -25,6 +25,7 @@ function TopOrdersSearch({ onSearch }) {
             <button
                 className="btn btn-primary"
                 onClick={handleSearch}
+                style={{marginTop: '30px'}}
             >
                 Tìm kiếm
             </button>

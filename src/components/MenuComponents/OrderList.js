@@ -50,7 +50,7 @@ function OrderList() {
                 .sort((a, b) => b.totalPrice - a.totalPrice)
                 .slice(0, topN);
             setFilteredOrders(sortedOrders);
-            setCurrentPage(1); // Reset to the first page
+            setCurrentPage(1);
             setIsSearching(true);
         }
     };
@@ -79,37 +79,29 @@ function OrderList() {
         <div className="container mt-4">
             <h1 className="text-center mb-4">Danh sách đơn hàng</h1>
 
-            <div className="mb-3 d-flex justify-content-between">
+            <div className="mb-4 d-flex justify-content-between flex-wrap">
                 <DateRangeSearch onSearch={handleSearchByDateRange} />
                 <TopOrdersSearch onSearch={handleSearchTopOrders} />
             </div>
 
-            <div className="d-flex justify-content-between mb-3">
+            <div className="mb-3 d-flex justify-content-between align-items-center">
                 <div></div>
                 <Link to={"/add"} className="btn btn-primary">Thêm đơn hàng</Link>
             </div>
 
-            {isSearching && (
-                <div className="mb-3">
-                    <button className="btn btn-secondary" onClick={handleResetSearch}>
-                        Quay lại danh sách đầu tiên
-                    </button>
-                </div>
-            )}
-
             {loading ? (
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center mt-4">
                     <ThreeDots color="#00BFFF" height={80} width={80} />
                 </div>
             ) : (
                 <div className="table-responsive mt-4">
                     {currentItems.length === 0 ? (
                         <div className="text-center">
-                            <p>No results found.</p>
+                            <p className="text-muted">Không tìm thấy kết quả.</p>
                         </div>
                     ) : (
                         <table className="table table-striped table-bordered">
-                            <thead>
+                            <thead className="table-dark">
                             <tr>
                                 <th scope="col">STT</th>
                                 <th scope="col">Mã đơn hàng</th>
@@ -119,7 +111,7 @@ function OrderList() {
                                 <th scope="col">Ngày mua</th>
                                 <th scope="col">Số lượng</th>
                                 <th scope="col">Tổng tiền (USD)</th>
-                                <th>Action</th>
+                                <th scope="col">Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -137,7 +129,9 @@ function OrderList() {
                                         <td>{format(new Date(order.purchaseDate), 'dd-MM-yyyy')}</td>
                                         <td>{order.quantity}</td>
                                         <td>{formatter.format(totalPrice)}</td>
-                                        <button>Sửa</button>
+                                        <td>
+                                            <button className="btn btn-warning btn-sm me-2">Sửa</button>
+                                        </td>
                                     </tr>
                                 );
                             })}
@@ -154,6 +148,13 @@ function OrderList() {
                     onPageChange={handlePageChange}
                 />
             </div>
+            {isSearching && (
+                <div className="d-flex justify-content-end mt-3">
+                    <button className="btn btn-secondary" onClick={handleResetSearch}>
+                        Quay lại danh sách đầu tiên
+                    </button>
+                </div>
+            )}
         </div>
     );
 }
