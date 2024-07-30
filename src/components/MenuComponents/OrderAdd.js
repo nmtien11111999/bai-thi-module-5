@@ -4,11 +4,12 @@ import { CreateOrder } from "../../services/OrderService/OrderAxios";
 import { ListProduct } from "../../services/ProductService/ProductAxios";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const AddOrderForm = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const products = useSelector((state) => state.products.products);
 
     useEffect(() => {
@@ -42,16 +43,18 @@ const AddOrderForm = () => {
         try {
             await dispatch(CreateOrder(newOrder));
             Swal.fire({
-                title: 'Success!',
-                text: 'Order has been added successfully.',
+                title: 'Thêm thành công!',
+                text: 'Thêm order thành công',
                 icon: 'success',
                 confirmButtonText: 'OK'
+            }).then(() => {
+                navigate("/list");
             });
             resetForm();
         } catch (error) {
             Swal.fire({
-                title: 'Error!',
-                text: 'An error occurred while adding the order.',
+                title: 'Lỗi',
+                text: 'Lỗi thêm sản phẩm',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });

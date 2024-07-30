@@ -119,6 +119,7 @@ function OrderList() {
                                 <th scope="col">Ngày mua</th>
                                 <th scope="col">Số lượng</th>
                                 <th scope="col">Tổng tiền (USD)</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -136,6 +137,7 @@ function OrderList() {
                                         <td>{format(new Date(order.purchaseDate), 'dd-MM-yyyy')}</td>
                                         <td>{order.quantity}</td>
                                         <td>{formatter.format(totalPrice)}</td>
+                                        <button>Sửa</button>
                                     </tr>
                                 );
                             })}
